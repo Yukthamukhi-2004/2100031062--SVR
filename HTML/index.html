@@ -15,32 +15,30 @@
         }
         /* Custom styles for the off-canvas menu */
         .sidebar {
-            /* Initial state: off-screen to the left */
             transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
         }
         .sidebar.open {
-            /* Active state: on-screen */
             transform: translateX(0);
         }
         /* Overlay to darken the background when menu is open */
         .overlay {
-            visibility: hidden; /* Hidden by default */
+            visibility: hidden;
             opacity: 0;
             transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
         }
         .overlay.active {
-            visibility: visible; /* Visible when menu is open */
+            visibility: visible;
             opacity: 1;
         }
         /* Style for the video element to ensure it's responsive */
         #cameraFeed {
             width: 100%;
-            max-width: 640px; /* Max width for the video */
+            max-width: 640px;
             height: auto;
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
-            background-color: #000; /* Black background for video area */
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            background-color: #000;
         }
     </style>
 </head>
@@ -49,18 +47,14 @@
     <!-- Off-canvas Sidebar Menu -->
     <nav id="sidebarMenu" class="sidebar fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-[100] p-6 pt-16 flex flex-col rounded-r-lg">
         <div class="flex justify-end absolute top-4 right-4">
-            <!-- Close button for the sidebar -->
             <button id="closeMenuButton" class="p-2 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
-                <!-- SVG icon for a close/X button -->
                 <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
         </div>
         <ul class="space-y-4">
-            <!-- New Home link added here -->
             <li><a href="#" class="sidebar-link block text-lg font-medium text-gray-700 hover:text-pink-600 transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100" data-category="Home">Home</a></li>
-            <!-- Data attributes are used to easily get the category name for dynamic content updates -->
             <li><a href="#" class="sidebar-link block text-lg font-medium text-gray-700 hover:text-pink-600 transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100" data-category="Baby Care">Baby Care</a></li>
             <li><a href="#" class="sidebar-link block text-lg font-medium text-gray-700 hover:text-pink-600 transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100" data-category="New Born">New Born</a></li>
             <li><a href="#" class="sidebar-link block text-lg font-medium text-gray-700 hover:text-pink-600 transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100" data-category="Garments">Garments</a></li>
@@ -74,26 +68,18 @@
 
     <!-- Header section for the top navigation bar -->
     <header class="bg-white shadow-md p-4 flex items-center justify-between sticky top-0 z-50 rounded-b-lg">
-        <!-- Left section: Menu button and site title -->
         <div class="flex items-center">
-            <!-- Menu Button (Hamburger Icon) -->
             <button id="menuButton" class="p-2 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
-                <!-- SVG icon for the three lines (hamburger) -->
                 <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                 </svg>
             </button>
-            <!-- Site Title -->
             <h1 class="ml-4 text-2xl font-bold text-pink-600">Chubby Cheeks</h1>
         </div>
-
-        <!-- Right section: Login and Sign Up buttons -->
         <div class="flex items-center space-x-3">
-            <!-- Login Button -->
             <button id="loginButton" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 Login
             </button>
-            <!-- Sign Up Button -->
             <button id="signupButton" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-400">
                 Sign Up
             </button>
@@ -114,7 +100,6 @@
 
         // Function to display a custom message box instead of alert()
         function showMessageBox(message) {
-            // Create the main container for the message box
             const messageBox = document.createElement('div');
             messageBox.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50';
             messageBox.innerHTML = `
@@ -125,10 +110,7 @@
                     </button>
                 </div>
             `;
-            // Append the message box to the body
             document.body.appendChild(messageBox);
-
-            // Add event listener to close the message box
             document.getElementById('closeMessageBox').addEventListener('click', function() {
                 document.body.removeChild(messageBox);
             });
@@ -144,7 +126,7 @@
         const sidebarOverlay = document.getElementById('sidebarOverlay');
         const loginButton = document.getElementById('loginButton');
         const signupButton = document.getElementById('signupButton');
-        const sidebarLinks = document.querySelectorAll('.sidebar-link'); // Select all sidebar links
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
         const mainContentDiv = document.getElementById('mainContent');
 
         // Function to open the sidebar
@@ -162,52 +144,153 @@
         // Function to stop the active camera stream
         function stopCameraStream() {
             if (currentStream) {
-                currentStream.getTracks().forEach(track => track.stop()); // Stop all tracks in the stream
-                currentStream = null; // Clear the stream reference
+                currentStream.getTracks().forEach(track => track.stop());
+                currentStream = null;
                 console.log('Camera stream stopped.');
             }
         }
 
-        // Sample dress data with your uploaded images
+        // Sample data for Baby Care products
+        const babyCareData = [
+            {
+                model: "Gentle Baby Soap",
+                cost: "$5.99",
+                image: "https://via.placeholder.com/150x150?text=Baby+Soap"
+            },
+            {
+                model: "Moisturizing Baby Cream",
+                cost: "$7.50",
+                image: "https://via.placeholder.com/150x150?text=Baby+Cream"
+            },
+            {
+                model: "Talc-Free Baby Powder",
+                cost: "$6.25",
+                image: "https://via.placeholder.com/150x150?text=Baby+Powder"
+            },
+            {
+                model: "Soft Baby Brush",
+                cost: "$4.99",
+                image: "https://via.placeholder.com/150x150?text=Baby+Brush"
+            },
+            {
+                model: "Baby Comb Set",
+                cost: "$3.75",
+                image: "https://via.placeholder.com/150x150?text=Baby+Comb"
+            },
+            {
+                model: "Mild Baby Shampoo",
+                cost: "$6.99",
+                image: "https://via.placeholder.com/150x150?text=Baby+Shampoo"
+            }
+        ];
+
+        // Sample data for New Born products
+        const newBornData = [
+            {
+                model: "Cozy Cotton Socks",
+                cost: "$3.99",
+                image: "https://via.placeholder.com/150x150?text=Baby+Socks"
+            },
+            {
+                model: "Soft Mittens",
+                cost: "$4.50",
+                image: "https://via.placeholder.com/150x150?text=Baby+Mittens"
+            },
+            {
+                model: "Organic Cotton Jubbs",
+                cost: "$8.99",
+                image: "https://via.placeholder.com/150x150?text=Baby+Jubbs"
+            },
+            {
+                model: "Traditional Langotas",
+                cost: "$5.25",
+                image: "https://via.placeholder.com/150x150?text=Langotas"
+            },
+            {
+                model: "Ergonomic Baby Carrier",
+                cost: "$29.99",
+                image: "https://via.placeholder.com/150x150?text=Baby+Carrier"
+            },
+            {
+                model: "BPA-Free Milk Bottle",
+                cost: "$7.99",
+                image: "https://via.placeholder.com/150x150?text=Milk+Bottle"
+            },
+            {
+                model: "Silicone Teether",
+                cost: "$4.99",
+                image: "https://via.placeholder.com/150x150?text=Teether"
+            },
+            {
+                model: "Cerelac Baby Cereal",
+                cost: "$6.50",
+                image: "https://via.placeholder.com/150x150?text=Cerelac"
+            },
+            {
+                model: "Instant Baby Food",
+                cost: "$8.25",
+                image: "https://via.placeholder.com/150x150?text=Instant+Food"
+            }
+        ];
+
+        // Sample dress data for Garments
         const dressData = [
             {
                 model: "Sunny Floral Dress",
                 cost: "$29.99",
-                image: "uploaded:dress1.jpg-6deac724-449e-4e09-8366-9e55bba8bb1a"
+                image: "https://via.placeholder.com/150x150?text=Sunny+Floral+Dress"
             },
             {
                 model: "Sweet Denim Babydoll",
                 cost: "$32.00",
-                image: "uploaded:dress 6.avif-cf0400fc-40ff-4bf1-91aa-68a3be187ff6"
+                image: "https://via.placeholder.com/150x150?text=Sweet+Denim+Babydoll"
             },
             {
                 model: "Classic Denim Midi",
                 cost: "$38.50",
-                image: "uploaded:dress 5.webp-5f7bcd8f-4f39-4a35-92f9-377f35d80a33"
+                image: "https://via.placeholder.com/150x150?text=Classic+Denim+Midi"
             },
             {
                 model: "Ruby Bow Dress",
                 cost: "$45.00",
-                image: "uploaded:dress 4.jpg-788d9132-317d-4e4f-b2a4-4d567447ca03"
+                image: "https://via.placeholder.com/150x150?text=Ruby+Bow+Dress"
             },
             {
                 model: "Crimson Belted Dress",
                 cost: "$42.00",
-                image: "uploaded:dress 3.jpg-0ac6f3b9-3b7c-482e-b97d-766ae2e68fab"
+                image: "https://via.placeholder.com/150x150?text=Crimson+Belted+Dress"
             },
             {
                 model: "Vibrant Bloom Dress",
                 cost: "$31.50",
-                image: "uploaded:dress 2.jpg-178d5d89-e10f-43fc-9ab6-969fae1a784a"
+                image: "https://via.placeholder.com/150x150?text=Vibrant+Bloom+Dress"
             }
         ];
 
+        // Function to populate product grid
+        function populateProductGrid(gridElement, products) {
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'bg-gray-50 p-4 rounded-lg shadow-sm flex flex-col items-center text-center';
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.model}" class="w-full h-48 object-cover rounded-md mb-3 border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-800">${product.model}</h3>
+                    <p class="text-pink-600 font-bold mt-1">${product.cost}</p>
+                    <button class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        View Details
+                    </button>
+                `;
+                productCard.querySelector('button').addEventListener('click', () => {
+                    showMessageBox(`You clicked on "${product.model}"! Cost: ${product.cost}`);
+                });
+                gridElement.appendChild(productCard);
+            });
+        }
+
         // Function to update the main content based on the selected category
         function updateMainContent(category) {
-            // Stop any existing camera stream before changing content
             stopCameraStream();
-
-            mainContentDiv.innerHTML = ''; // Clear previous content
+            mainContentDiv.innerHTML = '';
 
             let contentHTML = '';
             let headingText = '';
@@ -222,6 +305,26 @@
                     <p class="text-gray-600 leading-relaxed mt-4">
                         Explore our amazing features and services by navigating through the menu or signing up to get started.
                     </p>
+                `;
+            } else if (category === "Baby Care") {
+                headingText = "Baby Care Products";
+                contentHTML = `
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Discover our range of gentle and safe baby care products designed to keep your baby comfortable and happy.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <!-- Baby Care products will be inserted here -->
+                    </div>
+                `;
+            } else if (category === "New Born") {
+                headingText = "New Born Essentials";
+                contentHTML = `
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Find everything you need for your newborn, from clothing to feeding essentials, crafted with love and care.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <!-- New Born products will be inserted here -->
+                    </div>
                 `;
             } else if (category === "Garments") {
                 headingText = "Garments";
@@ -254,47 +357,38 @@
                 `;
             }
 
-            // Set the new content for the main div
             mainContentDiv.innerHTML = `<h2 class="text-3xl font-bold text-gray-800 mb-4">${headingText}</h2>` + contentHTML;
 
-            // If it's the Garments page, populate dress components and set up camera functionality
-            if (category === "Garments") {
+            // Populate product grids for specific categories
+            if (category === "Baby Care") {
+                const babyCareGrid = mainContentDiv.querySelector('.grid');
+                if (babyCareGrid) {
+                    populateProductGrid(babyCareGrid, babyCareData);
+                }
+            } else if (category === "New Born") {
+                const newBornGrid = mainContentDiv.querySelector('.grid');
+                if (newBornGrid) {
+                    populateProductGrid(newBornGrid, newBornData);
+                }
+            } else if (category === "Garments") {
                 const dressGrid = mainContentDiv.querySelector('.grid');
                 if (dressGrid) {
-                    dressData.forEach(dress => {
-                        const dressCard = document.createElement('div');
-                        dressCard.className = 'bg-gray-50 p-4 rounded-lg shadow-sm flex flex-col items-center text-center';
-                        // Use contentFetcher.fetch url directly for the image src
-                        dressCard.innerHTML = `
-                            <img src="${dress.image}" alt="${dress.model}" class="w-full h-48 object-cover rounded-md mb-3 border border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-800">${dress.model}</h3>
-                            <p class="text-pink-600 font-bold mt-1">${dress.cost}</p>
-                            <button class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                                View Details
-                            </button>
-                        `;
-                        dressCard.querySelector('button').addEventListener('click', () => {
-                            showMessageBox(`You clicked on "${dress.model}"! Cost: ${dress.cost}`);
-                        });
-                        dressGrid.appendChild(dressCard);
-                    });
+                    populateProductGrid(dressGrid, dressData);
                 }
 
                 const openCameraButton = document.getElementById('openCameraButton');
                 const stopCameraButton = document.getElementById('stopCameraButton');
                 const cameraFeed = document.getElementById('cameraFeed');
 
-                // Function to start the camera
                 async function startCamera() {
                     try {
-                        // Request access to the user's camera
                         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                        currentStream = stream; // Store the stream globally
-                        cameraFeed.srcObject = stream; // Set the video element's source to the stream
-                        cameraFeed.classList.remove('hidden'); // Show the video element
-                        openCameraButton.classList.add('hidden'); // Hide the open button
-                        stopCameraButton.classList.remove('hidden'); // Show the stop button
-                        cameraFeed.play(); // Start playing the video
+                        currentStream = stream;
+                        cameraFeed.srcObject = stream;
+                        cameraFeed.classList.remove('hidden');
+                        openCameraButton.classList.add('hidden');
+                        stopCameraButton.classList.remove('hidden');
+                        cameraFeed.play();
                         console.log('Camera started successfully.');
                     } catch (err) {
                         console.error('Error accessing camera: ', err);
@@ -305,22 +399,18 @@
                         } else {
                             showMessageBox(`Error starting camera: ${err.message}`);
                         }
-                        // Ensure buttons are in correct state if camera fails to start
                         openCameraButton.classList.remove('hidden');
                         stopCameraButton.classList.add('hidden');
                         cameraFeed.classList.add('hidden');
                     }
                 }
 
-                // Add event listener to open camera button
                 openCameraButton.addEventListener('click', startCamera);
-
-                // Add event listener to stop camera button
                 stopCameraButton.addEventListener('click', function() {
                     stopCameraStream();
-                    cameraFeed.classList.add('hidden'); // Hide the video element
-                    openCameraButton.classList.remove('hidden'); // Show the open button
-                    stopCameraButton.classList.add('hidden'); // Hide the stop button
+                    cameraFeed.classList.add('hidden');
+                    openCameraButton.classList.remove('hidden');
+                    stopCameraButton.classList.add('hidden');
                     console.log('Camera stopped by user.');
                 });
             }
@@ -350,11 +440,11 @@
         // Add event listeners to each sidebar link
         sidebarLinks.forEach(link => {
             link.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default link behavior (e.g., jumping to top of page)
-                const category = this.dataset.category; // Get the category from the data-category attribute
+                event.preventDefault();
+                const category = this.dataset.category;
                 console.log(`${category} clicked!`);
-                updateMainContent(category); // Update the main content
-                closeSidebar(); // Close the sidebar after selection
+                updateMainContent(category);
+                closeSidebar();
             });
         });
 
